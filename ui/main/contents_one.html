@@ -3,9 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <!-- Common -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="../lib/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="./index.css" />
+
+    <!-- Main -->
+    <link type="text/css" rel="stylesheet" href="./contents_one.css" />
+
 </head>
 <body>
     <div class="wrapper">
@@ -17,13 +22,13 @@
 
             <ul class="list-unstyled components">
                 <p>테스트 메뉴</p>
-                <li class="active">
+                <li>
                     <a href="/ui/main">홈</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">컨텐츠</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
+                        <li class="active">
                             <a href="/ui/main/contents_one.html">컨텐츠1</a>
                         </li>
                         <li>
@@ -50,26 +55,41 @@
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">서브페이지1</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">서브페이지2</a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </nav>
 
-            <h2>메인 컨텐츠 제목1</h2>
-            <p>메인 컨텐츠1</p>
+            <h2>복잡한 입력 폼 예제</h2>
+            <div class="row">
+                <div class="col-sm-4 bg-light">
+                    11
+                </div>
+                <div class="col-sm-8 bg-light">
 
-            <div class="line"></div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel">
+                            <div class="panel-heading" id="headingOne" role="tab">
+                                <div class="form-group row panel-title">
+                                    <label for="product" class="col-sm-2 col-form-label required">제품군</label>
+                                    <div class="col-sm-10 d-flex flex-row">
+                                        <!-- 제품군 -->
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="productGroupDiv">
+                                        </div>
+                                        <input type="text" class="form-control" id="productSearchText">
+                                    </div>
+                                </div>
+                            <div class="panel-collapse collapse in bg-gray" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <!-- 제품 -->
+                                    <div class='form-check form-check-inline' id="productDiv">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
 
-            <h2>메인 컨텐츠 제목2</h2>
-            <p>메인컨텐츠2</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -78,6 +98,6 @@
     <script src="../lib/bootstrap.min.js"></script>
 
     <!-- Main -->
-    <script src="index.js"></script>
+    <script src="./contents_one.js"></script>
 </body>
 </html>
