@@ -60,34 +60,68 @@
 
             <h2>복잡한 입력 폼 예제</h2>
             <div class="row">
-                <div class="col-sm-4 bg-light">
-                    11
+                <div class="col-lg-4 bg-light">
+                    111111
                 </div>
-                <div class="col-sm-8 bg-light">
+                <div class="col-lg-8 bg-light">
 
                     <div class="panel-group" id="accordion">
-                        <div class="panel">
+                        <div class="panel border">
                             <div class="panel-heading" id="headingOne" role="tab">
-                                <div class="form-group row panel-title">
-                                    <label for="product" class="col-sm-2 col-form-label required">제품군</label>
-                                    <div class="col-sm-10 d-flex flex-row">
+                                <div class="row panel-title">
+                                    <label for="product" class="col-lg-2 col-form-label required">제품군</label>
+                                    <div class="col-lg-10 d-flex flex-row">
                                         <!-- 제품군 -->
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons" id="productGroupDiv">
                                         </div>
-                                        <input type="text" class="form-control" id="productSearchText">
+                                        <input type="text" class="form-control ml-1" id="productSearchText">
                                     </div>
                                 </div>
-                            <div class="panel-collapse collapse in bg-gray" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <!-- 제품 -->
-                                    <div class='form-check form-check-inline' id="productDiv">
+                                <div class="panel-collapse collapse in bg-gray" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body pl-4">
+                                        <!-- 제품 -->
+                                        <div class='form-check form-check-inline row' id="productDiv">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                    </div>
+                        <div class="panel border">
+                            <div class="panel-heading" id="headingTwo" role="tab">
+                                <div class="row panel-title">
+                                    <label for="product" class="col-lg-2 col-form-label required">서비스</label>
+                                </div>
+                                <div class="panel-collapse collapse in bg-gray" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body pl-4">
+                                        <!-- 서비스 목록 -->
+                                        <div class='form-check form-check-inline row' id="serviceGameDiv">
+                                            <div class="col-lg-4 border-right">
+                                                <input class="form-check-input" type="checkbox" value="11" id="t11">
+                                                <label class="form-check-label" for="t11">
+                                                    Game
+                                                </label>
+                                            </div>
+                                            <div class="col-lg-8 d-flex flex-row">
+                                                <div>
+                                                    <input class="form-check-input" type="checkbox" value="22" id="t22">
+                                                    <label class="form-check-label" for="t22">
+                                                        스타크래프트
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input class="form-check-input" type="checkbox" value="33" id="t33">
+                                                    <label class="form-check-label" for="t33">
+                                                        워크래프트3
+                                                    </label>
+                                                </div>
 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
