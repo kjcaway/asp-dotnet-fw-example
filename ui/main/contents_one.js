@@ -5,11 +5,11 @@
         { "name": "All", "id": 3  },
     ],
     products: [
-        { "name": "WIndows10", "parentId": 1, "id": 11 },
-        { "name": "WIndows7", "parentId": 1, "id": 12 },
-        { "name": "WIndowsXP", "parentId": 1, "id": 13 },
-        { "name": "WIndows5", "parentId": 1, "id": 14 },
-        { "name": "WIndows3", "parentId": 1, "id": 15 },
+        { "name": "Windows10", "parentId": 1, "id": 11 },
+        { "name": "Windows7", "parentId": 1, "id": 12 },
+        { "name": "WindowsXP", "parentId": 1, "id": 13 },
+        { "name": "Windows5", "parentId": 1, "id": 14 },
+        { "name": "Windows3", "parentId": 1, "id": 15 },
         { "name": "Android3", "parentId": 2, "id": 21 },
         { "name": "Android4", "parentId": 2, "id": 22 },
         { "name": "Android5", "parentId": 2, "id": 23 },
@@ -39,7 +39,8 @@
         { "category": "Program", "name": "V3 Security", "parentId": 12, "id": 205 },
         { "category": "Program", "name": "FireWall", "parentId": 28, "id": 206 },
         { "category": "Program", "name": "NetDoctor", "parentId": 29, "id": 207 },
-    ]
+    ],
+    serviceCategory: [ "Game", "Program"]
 }
 
 var CONTENTS_ONE = {
@@ -67,23 +68,32 @@ var CONTENTS_ONE = {
         $("#productDiv").html(html);
 
 
-       /* html = "";
-        let html2 = "";
-        DATA_MAP.services.forEach(function (service) {
-            if (service.category == 'Game') {
+        html = "";
+        DATA_MAP.serviceCategory.forEach(function (serviceCategory) {
+            html += `
+            <div class='row' id="serviceCategoryDiv_${serviceCategory}">
+                <div class="col-lg-2 border-right">
+                    <input class="form-check-input" type="checkbox" value="${serviceCategory}" id="chk${serviceCategory}" name="chkSvcCategory">
+                    <label class="form-check-label" for="chk${serviceCategory}">
+                        ${serviceCategory}
+                    </label>
+                </div>
+                <div class="col-lg-10 d-flex flex-row">
+            `
+            DATA_MAP.services.filter(svc => svc.category == serviceCategory).forEach(service => {
                 html += `
-                <label class='tag form-check-label text-capitalize badge badge-success m-2' for='prd_${product.id}'>
-                    <input data-group='${product.parentId}' id='prd_${product.id}' value='${product.id}' name='productsChk' type='checkbox' class='form-check-input'>${product.name}
-                </label>
+                    <div class="ml-2">
+                        <input type="checkbox" service-group="${serviceCategory}" data-group="${service.parentId}" value="${service.id}" id="chk${service.id}" name="chkSvc">
+                        <label class="form-check-label" for="chk${service.id}">
+                            ${service.name}
+                        </label>
+                    </div>
                 `
+            });
 
-            } else {
-                html2 += `
-                
-                `
-            }
-        });
-        $("#serviceDiv").html(html+html2);*/
+            html += "</div></div>";
+        })
+        $("#serviceDiv").html(html);
 
     },
     initEventHandler: function () {
@@ -93,15 +103,43 @@ var CONTENTS_ONE = {
             $("#productSelector > button.active").not(this).removeClass("active");
             $(this).toggleClass("active");
         });*/
+
+        $("#productSearchText").on("keyup", function (e) {
+            const value = e.target.value;
+            if (value.length > 1) {
+                $('input:checkbox[name=productsChk]').each(function () {
+                    if ($(this).parent().text().includes(value) &&
+                        ($(this).attr("data-group") == CONTENTS_ONE.data.selectedProductGroup || CONTENTS_ONE.data.selectedProductGroup == '3')) {
+                        $(this).parent().css("display", "block");
+                    } else {
+                        $(this).parent().css("display", "none");
+                    }
+                })
+            } else {
+                $('input:checkbox[name=productsChk]').each(function () {
+                    if ($(this).attr("data-group") == CONTENTS_ONE.data.selectedProductGroup || CONTENTS_ONE.data.selectedProductGroup == '3') {
+                        $(this).parent().css("display", "block");
+                    } else {
+                        $(this).parent().css("display", "none");
+                    }
+                })
+            }
+
+        });
+
         $('input[name=groupRdo]').on("change", function () {
             if ($('input[name=groupRdo]:checked').val() != undefined) {
                 CONTENTS_ONE.data.selectedProductGroup = $('input[name=groupRdo]:checked').val();
 
-                $('#collapseOne').collapse('show');
+                if (CONTENTS_ONE.data.selectedProductGroup != undefined) {
+                    $('#collapseOne').collapse('show');
+                } else {
+                    $('#collapseOne').collapse('hide');
+                }
 
                 CONTENTS_ONE.applyProductView(CONTENTS_ONE.data.selectedProductGroup);
             }
-        })
+        });
 
         $('input[name=productsChk]').on("change", function () {
             let arr = [];
@@ -110,14 +148,59 @@ var CONTENTS_ONE = {
             });
             CONTENTS_ONE.data.selectedProducts = arr;
 
-            console.log(CONTENTS_ONE.data.selectedProducts)
+            if (arr.length > 0) {
+                $('#collapseTwo').collapse('show');
+            } else {
+                $('#collapseTwo').collapse('hide');
+            }
 
-            $('#collapseTwo').collapse('show');
-        })
+            CONTENTS_ONE.applyServiceView(CONTENTS_ONE.data.selectedProducts);
+        });
+
+        $('input[name=chkSvcCategory]').on("change", function () {
+            const isChecked = $(this).prop("checked");
+
+            // 하위 서비스 중 display: block 인 요소만 찾음
+            $(this).parent().next().find('input:checkbox[name=chkSvc]:visible').each(function () {
+                if (isChecked) {
+                    $(this).prop("checked", true);
+                } else {
+                    $(this).prop("checked", false);
+                }
+            })
+
+            $('input[name=chkSvc]').trigger('change'); // 하위 서비스 이벤트 트리거
+        });
+
+        $('input[name=chkSvc]').on("change", function () {
+            let arr = [];
+            $("input:checkbox[name=chkSvc]:checked").each(function () {
+                arr.push($(this).val());
+            });
+            CONTENTS_ONE.data.selectedServices = arr;
+
+            const service = $(this).attr("service-group");
+            let isAllChecked = true;
+
+            // 서비스 카테고리 checkbox 제어
+            $('input:checkbox[name=chkSvc][service-group=' + service + ']:visible').each(function () {
+                if ($(this).prop("checked") == false) {
+                    isAllChecked = false;
+                }
+            });
+
+            if (!isAllChecked) {
+                $('input[name=chkSvcCategory][value=' + service + ']').prop("checked", false);
+            } else {
+                $('input[name=chkSvcCategory][value=' + service + ']').prop("checked", true);
+            }
+            // ------
+
+            CONTENTS_ONE.applySelectedServiceView();
+        });
     },
     applyProductGroupView: function (data) {
         if (data.selectedProductGroup != undefined) {
-
         }
     },
     applyProductView: function (selectedProductGroup) {
@@ -129,6 +212,32 @@ var CONTENTS_ONE = {
             }
         })
     },
+    applyServiceView: function (selectedProducts) {
+        $('input:checkbox[name=chkSvc]').each(function () {
+            if (selectedProducts.includes($(this).attr("data-group"))) {
+                $(this).parent().css("display", "block");
+            } else {
+                $(this).parent().css("display", "none");
+            }
+        })
+    },
+    applySelectedServiceView: function () {
+        $("#selectedServiceDiv").empty();
+
+        if (CONTENTS_ONE.data.selectedServices.length > 0) {
+            // 선택된 서비스 이름 표시
+            const selectedServiceNames = CONTENTS_ONE.data.selectedServices.map(serviceId => {
+                return DATA_MAP.services.find(s => s.id == serviceId).name
+            }).join(); // default separate: ,
+
+            $("#selectedServiceDiv").append(selectedServiceNames);
+            // ------
+
+            $('#collapseThird').collapse('show');
+        } else {
+            $('#collapseThird').collapse('hide');
+        }
+    }
 }
 
 $(document).ready(function () {

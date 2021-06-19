@@ -74,7 +74,7 @@
                                         <!-- 제품군 -->
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons" id="productGroupDiv">
                                         </div>
-                                        <input type="text" class="form-control ml-1" id="productSearchText">
+                                        <input type="text" class="form-control ml-1" id="productSearchText" placeholder="검색할 단어를 입력하세요.(2자이상)">
                                     </div>
                                 </div>
                                 <div class="panel-collapse collapse in bg-gray" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
@@ -92,31 +92,20 @@
                                     <label for="product" class="col-lg-2 col-form-label required">서비스</label>
                                 </div>
                                 <div class="panel-collapse collapse in bg-gray" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="panel-body pl-4">
+                                    <div class="panel-body pl-4" id="serviceDiv">
                                         <!-- 서비스 목록 -->
-                                        <div class='form-check form-check-inline row' id="serviceGameDiv">
-                                            <div class="col-lg-4 border-right">
-                                                <input class="form-check-input" type="checkbox" value="11" id="t11">
-                                                <label class="form-check-label" for="t11">
-                                                    Game
-                                                </label>
-                                            </div>
-                                            <div class="col-lg-8 d-flex flex-row">
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" value="22" id="t22">
-                                                    <label class="form-check-label" for="t22">
-                                                        스타크래프트
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" value="33" id="t33">
-                                                    <label class="form-check-label" for="t33">
-                                                        워크래프트3
-                                                    </label>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel border">
+                            <div class="panel-heading" id="headingThird" role="tab">
+                                <div class="row panel-title">
+                                    <label for="product" class="col-lg-2 col-form-label required">선택된 서비스</label>
+                                </div>
+                                <div class="panel-collapse collapse in bg-gray" id="collapseThird" role="tabpanel" aria-labelledby="headingThird">
+                                    <div class="panel-body pl-4" id="selectedServiceDiv">
+                                        <!-- 선택된 서비스 목록 -->
                                     </div>
                                 </div>
                             </div>
