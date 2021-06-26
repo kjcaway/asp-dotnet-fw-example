@@ -1,10 +1,6 @@
 ﻿using DemoWebApi.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Results;
@@ -62,8 +58,6 @@ namespace DemoWebApi.Controllers
                 result = "OK"
             };
 
-            
-            
             return Json(result);
         }
 
