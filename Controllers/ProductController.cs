@@ -5,7 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web.Configuration;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace DemoWebApi.Controllers
 {
@@ -37,17 +39,38 @@ namespace DemoWebApi.Controllers
 
         [Route("api/product/get")]
         [HttpGet]
-        public HttpResponseMessage Get()
+        public IHttpActionResult Get()
         {
-            // file로 다운받아지네...
-            HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.OK, "value");
-            res.Content = new StringContent("Hello", System.Text.Encoding.Unicode);
-            res.Headers.CacheControl = new CacheControlHeaderValue()
+            var version = WebConfigurationManager.AppSettings["VERSION"].ToString();
+            var result = new ApiResult
             {
-                MaxAge = TimeSpan.FromMinutes(30)
+                version = version,
+                result = "OK"
+            };
+            
+            return Ok(result);
+        }
+
+        [Route("api/product/getJson")]
+        [HttpGet]
+        public JsonResult<ApiResult> GetJson()
+        {
+            var version = WebConfigurationManager.AppSettings["VERSION"].ToString();
+            var result = new ApiResult
+            {
+                version = version,
+                result = "OK"
             };
 
-            return res;
+            
+            
+            return Json(result);
+        }
+
+        public class ApiResult
+        {
+            public string version { get; set; }
+            public string result { get; set; }
         }
     }
 }
