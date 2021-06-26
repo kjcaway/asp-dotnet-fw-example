@@ -1,5 +1,5 @@
-﻿using DemoWebApi.Models;
-using System.Collections.Generic;
+﻿using DemoWebApi.DataAccess;
+using DemoWebApi.Models;
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.Http;
@@ -9,23 +9,32 @@ namespace DemoWebApi.Controllers
 {
     public class ProductController : ApiController
     {
+        string version = WebConfigurationManager.AppSettings["VERSION"].ToString();
         Product[] products = new Product[]
         {
-            new Product { Id = 1, Name = "Tomato Soup", Category = "Groceries", Price = 1 },
-            new Product { Id = 2, Name = "Yo-yo", Category = "Toys", Price = 3.75M },
-            new Product { Id = 3, Name = "Hammer", Category = "Hardware", Price = 16.99M }
+            new Product { productId = 1, name = "Tomato Soup", category = "Groceries", price = 1 },
+            new Product { productId = 2, name = "Yo-yo", category = "Toys", price = 3.75M },
+            new Product { productId = 3, name = "Hammer", category = "Hardware", price = 16.99M }
         };
 
         // /api/product/
-        public IEnumerable<Product> GetAllProducts()
+        public JsonResult<ApiResult> GetAllProducts()
         {
-            return products;
+            var productDA = new ProductDA();
+            var products = productDA.getProductList();
+
+            return Json(new ApiResult
+            {
+                version = version,
+                result = "SUCCESS",
+                data = products
+            });
         }
 
         // /api/product/{id}
         public IHttpActionResult GetProduct(int id)
         {
-            var product = products.FirstOrDefault((p) => p.Id == id);
+            var product = products.FirstOrDefault((p) => p.productId == id);
             if (product == null)
             {
                 return NotFound();
@@ -33,31 +42,19 @@ namespace DemoWebApi.Controllers
             return Ok(product);
         }
 
-        [Route("api/product/get")]
-        [HttpGet]
-        public IHttpActionResult Get()
+        [Route("api/product/save")]
+        [HttpPost]
+        public JsonResult<ApiResult> SaveProduct([FromBody] Product data)
         {
-            var version = WebConfigurationManager.AppSettings["VERSION"].ToString();
+            var productDA = new ProductDA();
+            productDA.saveProduct(data);
+
             var result = new ApiResult
             {
                 version = version,
                 result = "OK"
             };
             
-            return Ok(result);
-        }
-
-        [Route("api/product/getJson")]
-        [HttpGet]
-        public JsonResult<ApiResult> GetJson()
-        {
-            var version = WebConfigurationManager.AppSettings["VERSION"].ToString();
-            var result = new ApiResult
-            {
-                version = version,
-                result = "OK"
-            };
-
             return Json(result);
         }
 
@@ -65,6 +62,7 @@ namespace DemoWebApi.Controllers
         {
             public string version { get; set; }
             public string result { get; set; }
+            public object data {get;set;}
         }
     }
 }
