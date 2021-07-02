@@ -241,6 +241,12 @@ var CONTENTS_ONE = {
 }
 
 $(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
+
     CONTENTS_ONE.init();
     CONTENTS_ONE.initEventHandler();
 });

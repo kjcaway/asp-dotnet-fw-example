@@ -184,3 +184,25 @@ a.article:hover {
         display: none;
     }
 }
+
+/* for card */
+.card .card-body a.h-red:hover {
+    background-color: red;
+    color: white;
+}
+
+.card .card-body a.h-green:hover ~ .h-green-p, .h-green-p:hover{
+    background-color: green;
+    color: white;
+}
+
+.card-deck {
+    display: flex;
+    flex-flow: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+.card-deck .card {
+    width: 200px;
+}
