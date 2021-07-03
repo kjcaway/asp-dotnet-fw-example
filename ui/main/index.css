@@ -195,14 +195,3 @@ a.article:hover {
     background-color: green;
     color: white;
 }
-
-.card-deck {
-    display: flex;
-    flex-flow: wrap;
-    align-content: space-between;
-    justify-content: space-between;
-}
-
-.card-deck .card {
-    width: 200px;
-}

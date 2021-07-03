@@ -1,18 +1,22 @@
 ﻿let MAIN = {
     onAddCardClick: function (e) {
         const jqCard = $(`
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">제목</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">서브제목</h6>
-                    <p class="card-text">블라블라</p>
-                    <a href="#" class="card-link">Red</a>
-                    <a href="#" class="card-link">Green</a>
+            <div class="col-sm-3 mt-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">제목</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">서브제목</h6>
+                        <p class="card-text">블라블라</p>
+                        <a href="#" class="card-link">Red</a>
+                        <a href="#" class="card-link">Green</a>
+                    </div>
                 </div>
             </div>
         `);
 
-        $(".card-deck").append(jqCard);
+        jqCard.hide();
+        $("#cardGroupDiv").append(jqCard);
+        jqCard.show("normal");
     }
 };
 
