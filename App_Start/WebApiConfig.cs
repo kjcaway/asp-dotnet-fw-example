@@ -1,7 +1,9 @@
-﻿using System;
+﻿using DemoWebApi.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace DemoWebApi
 {
@@ -19,6 +21,12 @@ namespace DemoWebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // SystemDiagnosticsTraceWriter traceWriter = config.EnableSystemDiagnosticsTracing();
+            // traceWriter.IsVerbose = true;
+            // traceWriter.MinimumLevel = TraceLevel.Debug;
+
+            config.Services.Replace(typeof(ITraceWriter), new SimpleTracer());
         }
     }
 }

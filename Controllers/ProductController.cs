@@ -23,6 +23,9 @@ namespace DemoWebApi.Controllers
             var productDA = new ProductDA();
             var products = productDA.getProductList();
 
+            // System.Console.WriteLine(products);
+            // System.Diagnostics.Trace.WriteLine(products);
+
             return Json(new ApiResult
             {
                 version = version,
