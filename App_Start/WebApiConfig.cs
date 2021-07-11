@@ -7,6 +7,7 @@ using System.Web.Http.Tracing;
 using System.IO;
 using log4net.Config;
 using log4net;
+using DemoWebApi.filters;
 
 namespace DemoWebApi
 {
@@ -24,6 +25,9 @@ namespace DemoWebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Exception Filter
+            config.Filters.Add(new ExceptionFilter());
 
             // for logging test
             // SystemDiagnosticsTraceWriter traceWriter = config.EnableSystemDiagnosticsTracing();
