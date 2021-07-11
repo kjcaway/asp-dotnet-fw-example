@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.IO;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace DemoWebApi
 {
@@ -11,6 +8,9 @@ namespace DemoWebApi
     {
         protected void Application_Start()
         {
+            string logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log4net.xml");
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(logPath));
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

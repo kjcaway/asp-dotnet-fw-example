@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<log4net>
+  <!-- Console Log -->
+  <appender name="Console" type="log4net.Appender.ConsoleAppender">
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%d [%t] %-5p %c - %m%n" />
+    </layout>
+  </appender>
+  <!-- File Log -->
+  <appender name="RollingFile" type="log4net.Appender.RollingFileAppender">
+    <file value="c:\logs\DemoWebApi.log" />
+    <appendToFile value="true" />
+    <datePattern value="-yyyy-MM-dd" />
+    <rollingStyle value="Date" />
+    <maximumFileSize value="10MB" />
+    <maxSizeRollBackups value="10" />
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%d [%t] %-5p %c - %m%n" />
+    </layout>
+  </appender>
+  <!-- Log Level -->
+  <root>
+    <level value="DEBUG" />
+    <appender-ref ref="Console" />
+    <appender-ref ref="RollingFile" />
+  </root>
+</log4net>

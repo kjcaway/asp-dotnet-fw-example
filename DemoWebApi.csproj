@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="log4net.xml" />
     <Content Include="ui\index.html" />
     <Content Include="ui\lib\bootstrap.min.css" />
     <Content Include="ui\lib\bootstrap.min.js" />

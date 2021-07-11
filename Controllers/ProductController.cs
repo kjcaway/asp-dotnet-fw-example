@@ -4,12 +4,17 @@ using System.Linq;
 using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Results;
+using log4net;
+using System.Reflection;
 
 namespace DemoWebApi.Controllers
 {
     public class ProductController : ApiController
     {
+        readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         string version = WebConfigurationManager.AppSettings["VERSION"].ToString();
+
         Product[] products = new Product[]
         {
             new Product { productId = 1, name = "Tomato Soup", category = "Groceries", price = 1 },
@@ -25,6 +30,8 @@ namespace DemoWebApi.Controllers
 
             // System.Console.WriteLine(products);
             // System.Diagnostics.Trace.WriteLine(products);
+
+            logger.Debug("GetAllProducts");
 
             return Json(new ApiResult
             {
@@ -42,6 +49,7 @@ namespace DemoWebApi.Controllers
             {
                 return NotFound();
             }
+            
             return Ok(product);
         }
 
