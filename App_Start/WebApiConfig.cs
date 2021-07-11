@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Tracing;
+using System.IO;
+using log4net.Config;
+using log4net;
 
 namespace DemoWebApi
 {
@@ -22,11 +25,13 @@ namespace DemoWebApi
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            // for logging test
             // SystemDiagnosticsTraceWriter traceWriter = config.EnableSystemDiagnosticsTracing();
             // traceWriter.IsVerbose = true;
             // traceWriter.MinimumLevel = TraceLevel.Debug;
 
-            config.Services.Replace(typeof(ITraceWriter), new SimpleTracer());
+            // for custom logging test
+            // config.Services.Replace(typeof(ITraceWriter), new SimpleTracer());
         }
     }
 }
