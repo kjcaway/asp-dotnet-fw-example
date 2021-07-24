@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using DemoWebApi.Dto;
 using DemoWebApi.Dto.Product;
 using DemoWebApi.Exceptions;
+using System.Linq;
 
 namespace DemoWebApi.Controllers
 {
@@ -71,6 +72,12 @@ namespace DemoWebApi.Controllers
         [HttpPost]
         public JsonResult<ApiResult> SaveProduct([FromBody] ProductReq data)
         {
+            if (!ModelState.IsValid)
+            {
+                var error = ModelState.Where(n => n.Value.Errors.Count > 0).ToList();
+                throw new BadParamsExeception(error);
+            }
+
             var productDA = new ProductDA();
             productDA.saveProduct(new Product(data));
             
@@ -85,6 +92,12 @@ namespace DemoWebApi.Controllers
         [HttpPut]
         public JsonResult<ApiResult> ModProduct([FromBody] ProductReq data)
         {
+            if (!ModelState.IsValid)
+            {
+                var error = ModelState.Where(n => n.Value.Errors.Count > 0).ToList();
+                throw new BadParamsExeception(error);
+            }
+
             var productDA = new ProductDA();
 
             if(productDA.getProduct(data.productId) == null)

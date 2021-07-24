@@ -6,7 +6,7 @@ namespace DemoWebApi.Exceptions
     public class BaseException: Exception
     {
         public HttpStatusCode httpCode { get; set; }
-        public string message { get; set; }
+        public object message { get; set; }
 
         public BaseException()
         {
