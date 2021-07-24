@@ -1,11 +1,11 @@
 ﻿using DemoWebApi.DataAccess;
 using DemoWebApi.Models;
-using System.Linq;
 using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Results;
 using log4net;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace DemoWebApi.Controllers
 {
@@ -106,6 +106,7 @@ namespace DemoWebApi.Controllers
             return Json(result);
         }
 
+        [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
         public class ApiResult
         {
             public string version { get; set; }

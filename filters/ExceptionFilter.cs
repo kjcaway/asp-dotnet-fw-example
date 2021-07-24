@@ -1,11 +1,7 @@
-﻿using log4net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DemoWebApi.Exceptions;
+using log4net;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Filters;
 
@@ -17,7 +13,17 @@ namespace DemoWebApi.filters
 
         public override void OnException(HttpActionExecutedContext context)
         {
-            // if (context.Exception is BusinessException)
+            if(context.Exception is BaseException)
+            {
+                HttpStatusCode httpCode = (context.Exception as BaseException).httpCode;
+                string message = (context.Exception as BaseException).message;
+
+                throw new HttpResponseException(new HttpResponseMessage(httpCode)
+                {
+                    Content = new StringContent(message),
+                    ReasonPhrase = message
+                });
+            }
             logger.Error(context.Exception);
 
             throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError)

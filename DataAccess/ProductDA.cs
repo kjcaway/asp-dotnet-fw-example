@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using log4net;
 using System.Reflection;
+using DemoWebApi.Exceptions;
 
 namespace DemoWebApi.DataAccess
 {
@@ -80,6 +81,7 @@ namespace DemoWebApi.DataAccess
 
                 conn.Close();
 
+                if (result.Count != 1) throw new NotFoundProductException();
                 return result[0];
             }
             catch(Exception ex)
