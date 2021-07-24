@@ -104,6 +104,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="DataAccess\ProductDA.cs" />
+    <Compile Include="Dto\ApiResult.cs" />
+    <Compile Include="Dto\Product\ProductReq.cs" />
     <Compile Include="Exceptions\BaseException.cs" />
     <Compile Include="Exceptions\NotFoundProductException.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />

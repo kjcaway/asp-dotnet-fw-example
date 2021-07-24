@@ -6,6 +6,9 @@ using System.Web.Http.Results;
 using log4net;
 using System.Reflection;
 using Newtonsoft.Json;
+using DemoWebApi.Dto;
+using DemoWebApi.Dto.Product;
+using DemoWebApi.Exceptions;
 
 namespace DemoWebApi.Controllers
 {
@@ -31,8 +34,6 @@ namespace DemoWebApi.Controllers
             // System.Console.WriteLine(products);
             // System.Diagnostics.Trace.WriteLine(products);
 
-            logger.Debug("GetAllProducts");
-
             return Json(new ApiResult
             {
                 version = version,
@@ -57,62 +58,46 @@ namespace DemoWebApi.Controllers
         public JsonResult<ApiResult> GetProduct(int id)
         {
             var productDA = new ProductDA();
-            var result = new ApiResult
+
+            return Json(new ApiResult
             {
                 version = version,
                 result = "OK",
                 data = productDA.getProduct(id)
-            };
-
-            return Json(result);
+            });
         }
 
         [Route("api/product/save")]
         [HttpPost]
-        public JsonResult<ApiResult> SaveProduct([FromBody] Product data)
+        public JsonResult<ApiResult> SaveProduct([FromBody] ProductReq data)
         {
             var productDA = new ProductDA();
-            productDA.saveProduct(data);
-
-            var result = new ApiResult
+            productDA.saveProduct(new Product(data));
+            
+            return Json(new ApiResult
             {
                 version = version,
                 result = "OK"
-            };
-            
-            return Json(result);
+            });
         }
 
         [Route("api/product/modify")]
         [HttpPut]
-        public JsonResult<ApiResult> ModProduct([FromBody] Product data)
+        public JsonResult<ApiResult> ModProduct([FromBody] ProductReq data)
         {
             var productDA = new ProductDA();
-            var result = new ApiResult();
 
             if(productDA.getProduct(data.productId) == null)
             {
-                result.version = version;
-                result.result = "FAIL";
-                result.error = "Not Found Product";
-
-                return Json(result);
+                throw new NotFoundProductException();
             }
-            productDA.updateProduct(data);
+            productDA.updateProduct(new Product(data));
 
-            result.version = version;
-            result.result = "OK";
-
-            return Json(result);
-        }
-
-        [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-        public class ApiResult
-        {
-            public string version { get; set; }
-            public string result { get; set; }
-            public object data {get;set;}
-            public object error { get; set; }
+            return Json(new ApiResult
+            {
+                version = version,
+                result = "OK"
+            });
         }
     }
 }
