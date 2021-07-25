@@ -1,21 +1,17 @@
-﻿using DemoWebApi.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-using System.Web.Http.Tracing;
-using System.IO;
-using log4net.Config;
-using log4net;
+﻿using System.Web.Http;
 using DemoWebApi.filters;
+using DemoWebApi.Config;
 
 namespace DemoWebApi
 {
     public static class WebApiConfig
     {
+
         public static void Register(HttpConfiguration config)
         {
             // Web API 구성 및 서비스
+            var container = UnityConfig.Config();
+            config.DependencyResolver = new UnityResolver(container);
 
             // Web API 경로
             config.MapHttpAttributeRoutes();

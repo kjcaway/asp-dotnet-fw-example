@@ -10,7 +10,7 @@ using DemoWebApi.Exceptions;
 
 namespace DemoWebApi.DataAccess
 {
-    public class ProductDA
+    public class ProductDA: IProductDA
     {
         private readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
