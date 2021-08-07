@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!-- Common -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="../lib/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="./index.css" />
+
+    <!-- Main -->
+    <link type="text/css" rel="stylesheet" href="./contents_two.css" />
+
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>테스트웹앱</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>테스트 메뉴</p>
+                <li>
+                    <a href="/ui/main">홈</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">컨텐츠</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li class="active">
+                            <a href="/ui/main/contents_one.html">컨텐츠1</a>
+                        </li>
+                        <li>
+                            <a href="/ui/main/contents_two.html">컨텐츠2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">설정</a>
+                </li>
+            </ul>
+
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-align-left"></i>
+                        <span>사이드바 접기</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <h2>입력 폼 예제2</h2>
+            <div class="row">
+                <div class="col-8">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center parent" id="p1">
+                            Cras justo odio
+                            <i class="fa fa-chevron-up"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center child" data-parent="p1" style="display: none!important">
+                            Child 1
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center child" data-parent="p1" style="display: none!important">
+                            Child 2
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center parent" id="p2">
+                            Dapibus ac facilisis in
+                            <i class="fa fa-chevron-up"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center child" data-parent="p2" style="display: none!important">
+                            Child 1
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center child" data-parent="p2" style="display: none!important">
+                            Child 2
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center parent" id="p3">
+                            Morbi leo risus
+                            <i class="fa fa-chevron-up"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center child" data-parent="p3" style="display: none!important">
+                            Child 1
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center child" data-parent="p3" style="display: none!important">
+                            Child 2
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Common -->
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+
+    <!-- Main -->
+    <script src="./contents_two.js"></script>
+</body>
+</html>

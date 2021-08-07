@@ -1,0 +1,9 @@
+﻿@charset "UTF-8";
+
+.parent {
+    background-color: antiquewhite;
+}
+.parent i {
+    cursor: pointer;
+}
+
