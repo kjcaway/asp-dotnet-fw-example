@@ -101,6 +101,9 @@
     <Content Include="ui\lib\bootstrap.min.css" />
     <Content Include="ui\lib\bootstrap.min.js" />
     <Content Include="ui\lib\jquery.min.js" />
+    <Content Include="ui\main\contents_two.js" />
+    <Content Include="ui\main\contents_two.html" />
+    <Content Include="ui\main\contents_two.css" />
     <Content Include="ui\main\contents_one.css" />
     <Content Include="ui\main\contents_one.html" />
     <Content Include="ui\main\contents_one.js" />
