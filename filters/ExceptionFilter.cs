@@ -18,16 +18,16 @@ namespace DemoWebApi.filters
             if(context.Exception is BaseException)
             {
                 HttpStatusCode httpCode = (context.Exception as BaseException).httpCode;
+                string jsonStr = JsonConvert.SerializeObject(new { 
+                    code = httpCode,
+                    message = (context.Exception as BaseException).message 
+                });
 
-                logger.Error(context.Exception);
+                logger.Error(jsonStr);
 
                 throw new HttpResponseException(new HttpResponseMessage(httpCode)
                 {
-                    Content = new StringContent(JsonConvert.SerializeObject(new
-                    {
-                        code = httpCode,
-                        message = (context.Exception as BaseException).message
-                    }), Encoding.UTF8, "application/json"),
+                    Content = new StringContent(jsonStr, Encoding.UTF8, "application/json"),
                     ReasonPhrase = null
                 });
             }
@@ -35,11 +35,7 @@ namespace DemoWebApi.filters
 
             throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(new
-                {
-                    code = HttpStatusCode.InternalServerError,
-                    message = (context.Exception as BaseException).message
-                }), Encoding.UTF8, "application/json"),
+                Content = new StringContent("Internal Server Error"),
                 ReasonPhrase = "InternalServerError"
             });
         }
