@@ -23,6 +23,8 @@ namespace DemoWebApi.filters
                     message = (context.Exception as BaseException).message 
                 });
 
+                logger.Error(context.Exception);
+                logger.Error("==================================");
                 logger.Error(jsonStr);
 
                 throw new HttpResponseException(new HttpResponseMessage(httpCode)
