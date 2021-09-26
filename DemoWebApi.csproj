@@ -129,6 +129,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Config\UnityResolver.cs" />
     <Compile Include="Config\UnityConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="DataAccess\IProductDA.cs" />
     <Compile Include="DataAccess\ProductDA.cs" />
