@@ -2,47 +2,21 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache">
     <title></title>
     <!-- Common -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="../lib/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="./index.css" />
-
-    <!-- Main -->
     <link type="text/css" rel="stylesheet" href="./contents_two.css" />
 
+    <!-- Component -->
+    <link rel="import" href="../components/comp-navi.html">
 </head>
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>테스트웹앱</h3>
-            </div>
-
-            <ul class="list-unstyled components">
-                <p>테스트 메뉴</p>
-                <li>
-                    <a href="/ui/main">홈</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">컨텐츠</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li class="active">
-                            <a href="/ui/main/contents_one.html">컨텐츠1</a>
-                        </li>
-                        <li>
-                            <a href="/ui/main/contents_two.html">컨텐츠2</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">설정</a>
-                </li>
-            </ul>
-
-
-        </nav>
+        <comp-navi></comp-navi>
 
         <!-- Page Content  -->
         <div id="content">
@@ -104,5 +78,23 @@
 
     <!-- Main -->
     <script src="./contents_two.js"></script>
+
+    <script>
+        (function (global) {
+            'use strict';
+
+            var document = global.document;
+            var is_support_register = 'registerElement' in document;
+            var is_support_import = 'import' in document.createElement('link');
+            var is_support_template = 'content' in document.createElement('template');
+
+            if (!is_support_register || !is_support_import || !is_support_template) {
+                var polyfill = document.createElement('script');
+                polyfill.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.2/webcomponents-lite.js';
+                document.body.appendChild(polyfill);
+            }
+
+        })(window);
+    </script>
 </body>
 </html>

@@ -1,0 +1,62 @@
+﻿<template id="comp-navi">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>테스트웹앱</h3>
+        </div>
+        <ul class="list-unstyled components">
+            <p>테스트 메뉴</p>
+            <li class="active">
+                <a href="/ui/main">홈</a>
+            </li>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">컨텐츠</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="/ui/main/contents_one.html">컨텐츠1</a>
+                    </li>
+                    <li>
+                        <a href="/ui/main/contents_two.html">컨텐츠2</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/ui/main/settings.html">설정</a>
+            </li>
+        </ul>
+    </nav>
+</template>
+
+<script>
+    class CompNavi extends HTMLElement {
+        constructor() {
+            super();
+        }
+        connectedCallback() {
+            
+            const doc = (document._currentScript || document.currentScript).ownerDocument;
+            const template = doc.querySelector('#comp-navi');
+            const temp = document.importNode(template.content, true);
+            this.appendChild(temp);
+            
+            /**
+            // #1. Shadow DOM
+            const currentDocument = window.document.currentScript.ownerDocument;
+            const shadowRoot = this.attachShadow({ mode: 'open' });
+
+            // #2. 템플릿을 선택하고 복제합니다.
+            const template = currentDocument.querySelector('#comp-navi');
+            const instance = template.content.cloneNode(true);
+
+            // #3. 복제된 노드를 ShadowRoot에 삽입합니다.
+            shadowRoot.appendChild(instance);
+            **/
+            
+        }
+        render() {
+            console.log("Aa");
+        }
+    }
+
+    window.customElements.define('comp-navi', CompNavi);
+    
+</script>

@@ -110,6 +110,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="log4net.xml" />
+    <Content Include="ui\components\comp-navi.html" />
     <Content Include="ui\index.html" />
     <Content Include="ui\lib\bootstrap.min.css" />
     <Content Include="ui\lib\bootstrap.min.js" />
@@ -120,6 +121,9 @@
     <Content Include="ui\main\contents_one.css" />
     <Content Include="ui\main\contents_one.html" />
     <Content Include="ui\main\contents_one.js" />
+    <Content Include="ui\main\settings.css" />
+    <Content Include="ui\main\settings.js" />
+    <Content Include="ui\main\settings.html" />
     <Content Include="ui\main\index.css" />
     <Content Include="ui\main\index.html" />
     <Content Include="ui\main\index.js" />
