@@ -6,8 +6,8 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="../lib/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="../lib/bootstrap-treeview.min.css" />
     <link type="text/css" rel="stylesheet" href="./settings.css" />
-
     <!-- Component -->
     <link rel="import" href="../components/comp-navi.html">
 </head>
@@ -31,13 +31,24 @@
             </nav>
 
             <h2>설정</h2>
-
+            <div class="row">
+                <div id="tree" class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <button type="button" id="add-btn" class="btn">Add</button>&nbsp;
+                        <button type="button" id="delete-btn" class="btn">Delete</button>
+                    </div>
+                    <div id="info-node" class="mt-3"></div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Common -->
     <script src="../lib/jquery.min.js"></script>
     <script src="../lib/bootstrap.min.js"></script>
+    <script src="../lib/bootstrap-treeview.min.js"></script>
+
 
     <!-- Main -->
     <script src="settings.js"></script>
